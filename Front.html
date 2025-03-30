@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Bêzin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #ff6b6b);
+            animation: gradientBG 15s ease infinite;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-family: 'Great Vibes', cursive;
+            text-shadow: 0 0 10px #ff69b4,
+                 0 0 20px #ff69b4,
+                 0 0 30px #ff69b4;
+            animation: neon 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neon {
+            from { text-shadow: 0 0 10px #ff69b4; }
+            to { text-shadow: 0 0 20px #ff1493, 0 0 30px #ff6b6b; }
+        }
+
+        .love-message {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(255,105,180,0.3);
+            margin: 20px 0;
+        }
+
+        .love-message p {
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .dates-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .date-button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .date-button:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+
+        .photo-container {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            transform: translateY(0);
+            transition: transform 0.5s;
+        }
+
+        .photo-container:hover {
+            transform: translateY(-10px);
+        }
+
+        #displayedPhoto {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: none;
+        }
+
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: float 6s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .petala {
+                position: fixed;
+                pointer-events: none;
+                animation: cair 8s linear infinite;
+                opacity: 0.7;
+        }
+
+        @keyframes cair {
+                0% { transform: translateY(-100vh) rotate(0deg); }
+                100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>1% do meu Amor</h1>
+        
+        <div class="love-message">
+            <p>Bezin, isso não é nem 1% do meu amor e do que eu sou capaz de fazer por você. Te amar foi a minha melhor escolha! Eu quero estar sempre ao seu lado, e não importa o que os outros digam. A felicidade eu encontrei em você, e só Deus é capaz de mudar isso. Se Ele não quiser mudar isso, seremos eu e você para sempre. Eu te amo mil milhões!</p>
+        </div>
+
+        <div class="dates-container" id="datesContainer"></div>
+
+        <div class="photo-container" id="photoContainer">
+            <img src="" alt="Nossa Foto" id="displayedPhoto">
+        </div>
+    </div>
+
+    <script>
+        const photos = [
+            'fotos/foto1.jpg',
+            'fotos/foto2.jpg',
+            'fotos/foto3.jpg',
+            'fotos/foto4.jpg',
+            'fotos/foto5.jpg',
+            'fotos/foto6.jpg',
+            'fotos/foto7.jpg',
+            'fotos/foto8.jpg',
+            'fotos/foto9.jpg',
+            'fotos/foto10.jpg'
+        ];
+
+        const datesContainer = document.getElementById('datesContainer');
+        const photo = document.getElementById('displayedPhoto');
+
+        const textosBotoes = [
+            "Seu Carinho É o que me acalma",
+            "Nossa simplicidade e conexão são apaixonantes",
+            "No teu sorriso eu viajo ao mais profundo e vasto universo",
+            "Teu abraço sempre será o meu porto seguro",
+            "A nossa alegria contagia até o coração mais quebrado",
+            "No teu beijo eu conheci as verdadeiras borboletas",
+            "Viajaremos o mundo e contaremos nossa história",
+            "Teremos tempo para Viver",
+            "Que eu veja sempre seu sorriso, pois sei que haverá festa",
+            "VocÊ não sabe o quanto eu Amo... Amar Você"
+        ];
+
+        for (let i = 0; i < photos.length; i++) {
+            const button = document.createElement('button');
+            button.className = 'date-button';
+            button.textContent = textosBotoes[i];
+            
+            button.addEventListener('click', () => {
+                photo.src = photos[i];
+                photo.style.display = 'block';
+                photo.style.animation = 'fadeIn 0.5s';
+            });
+            
+            datesContainer.appendChild(button);
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        function createHearts() {
+            const heartsContainer = document.createElement('div');
+            heartsContainer.className = 'hearts-container';
+            
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heartsContainer.appendChild(heart);
+            }
+            
+            document.body.appendChild(heartsContainer);
+        }
+
+        window.onload = createHearts;
+
+        function criarPetala() {
+            const petala = document.createElement('div');
+            petala.className = 'petala';
+            petala.innerHTML = '🌸';
+            petala.style.left = Math.random() * 100 + '%';
+            petala.style.animationDuration = Math.random() * 3 + 5 + 's';
+            document.body.appendChild(petala);
+    
+            setTimeout(() => petala.remove(), 8000);
+        }
+
+setInterval(criarPetala, 300);
+    </script>
+</body>
+</html>
